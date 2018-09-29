@@ -34,7 +34,7 @@ module.exports = {
   output: {
     path: distPath,
     filename: '[name].js',
-    publicPath: '/assets/',
+    publicPath: '/',
   },
   resolve: {
     modules: ['node_modules', 'src'],
