@@ -7,7 +7,7 @@ export const renderHeader = helmet => `
             ${helmet.meta.toString()}
             ${helmet.link.toString()}
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-            <link rel="icon" type="image/png" href="/assets/favicon.ico" />
+            <link rel="icon" type="image/png" href="/favicon.ico" />
         </head>
         <body ${helmet.bodyAttributes.toString()}>
             <div id="root">
@@ -21,8 +21,8 @@ export const renderFooter = (loadableState, preloadedState) => `
                 window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
             </script>
             <style id="jss-server-side">${''}</style>
-            <script src="/assets/vendor.js"></script>
-            <script src="/assets/client.js"></script>
+            <script src="/vendor.js"></script>
+            <script src="/client.js"></script>
             ${loadableState.getScriptTag()}
         </body>
     </html>
