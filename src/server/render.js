@@ -21,8 +21,8 @@ export const renderFooter = (loadableState, preloadedState) => `
                 window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
             </script>
             <style id="jss-server-side">${''}</style>
-            <script src="/vendor.js"></script>
-            <script src="/client.js"></script>
+            <script src="/dist/vendor.js"></script>
+            <script src="/dist/client.js"></script>
             ${loadableState.getScriptTag()}
         </body>
     </html>
