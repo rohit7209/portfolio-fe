@@ -1,7 +1,7 @@
 import { render } from 'react-dom';
 import React, { Component } from 'react';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import createPalette from 'material-ui/styles/palette';
+// import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+// import createPalette from 'material-ui/styles/palette';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { loadComponents } from 'loadable-components';
 import { Provider } from 'react-redux';
@@ -11,16 +11,16 @@ import createHistory from 'history/createBrowserHistory';
 import createSagaMiddleware from 'redux-saga';
 
 import App from '../shared/app';
-import gistReducers from '../shared/home/reducer';
-import playlistReducer from '../shared/playlists/reducer';
+// import gistReducers from '../shared/home/reducer';
+// import playlistReducer from '../shared/playlists/reducer';
 import sagas from '../shared/home/sagas';
 
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__;
 
 const reducer = combineReducers({
-    gists: gistReducers,
-    playlists: playlistReducer,
+    // gists: gistReducers,
+    // playlists: playlistReducer,
     routing: routerReducer,
 });
 
@@ -73,13 +73,13 @@ class Main extends Component {
 
 loadComponents().then(() => {
     render(
-        <MuiThemeProvider>
-            <Provider store={store}>
-                <ConnectedRouter history={history}>
-                    <Main />
-                </ConnectedRouter >
-            </Provider>
-        </MuiThemeProvider>,
+        // <MuiThemeProvider>
+        <Provider store={store}>
+            <ConnectedRouter history={history}>
+                <Main />
+            </ConnectedRouter >
+        </Provider>,
+        // </MuiThemeProvider>,
         document.getElementById('root'),
     );
 });

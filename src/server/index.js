@@ -3,8 +3,8 @@ import express from 'express';
 import React from 'react';
 import { renderToNodeStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import createPalette from 'material-ui/styles/palette';
+// import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+// import createPalette from 'material-ui/styles/palette';
 import { getLoadableState } from 'loadable-components/server';
 import { Provider } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -32,13 +32,13 @@ app.get('*', async (req, res) => {
     // const { styleManager, theme } = createStyleManager();
 
     const appWithRouter = (
-        <MuiThemeProvider>
-            <Provider store={store}>
-                <StaticRouter location={req.url} context={context}>
-                    <App />
-                </StaticRouter>
-            </Provider>
-        </MuiThemeProvider>
+        // <MuiThemeProvider>
+        <Provider store={store}>
+            <StaticRouter location={req.url} context={context}>
+                <App />
+            </StaticRouter>
+        </Provider>
+        // </MuiThemeProvider>
     );
 
     if (context.url) {
