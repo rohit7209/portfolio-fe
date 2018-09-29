@@ -4,7 +4,7 @@ import createMemoryHistory from 'history/createMemoryHistory';
 import { routerMiddleware } from 'react-router-redux';
 
 import gistsReducer from '../shared/home/reducer';
-import playlistReducer from '../shared/playlists/reducer';
+// import playlistReducer from '../shared/playlists/reducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -17,7 +17,7 @@ export default (initialState) => {
     const store = createStore(
         combineReducers({
             gists: gistsReducer,
-            playlists: playlistReducer,
+            // playlists: playlistReducer,
         }),
         initialState,
         compose(applyMiddleware(...reduxMiddlewares)),
