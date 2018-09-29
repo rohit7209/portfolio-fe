@@ -24,7 +24,7 @@ import sagas from '../shared/home/sagas';
 //     });
 
 const app = express();
-app.use('/', express.static('./dist'));
+app.use('/dist', express.static('./dist'));
 
 app.get('*', async (req, res) => {
   const store = configureStore();
