@@ -15,7 +15,7 @@ const Image = styled.div`
   z-index: 100;
   height: 100%;
   width: 100%;
-  background: url(${CONSTANTS.server_url}/assets/images/light-bulb-bg.jpg);
+  background: url(/assets/images/light-bulb-bg.jpg);
   background-size: 120% auto;
   background-position: 0px -50px;
   // box-shadow: inset 0 0 100px #000000;
