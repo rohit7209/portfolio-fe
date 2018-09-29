@@ -9,23 +9,23 @@ import gistsReducer from '../shared/home/reducer';
 const sagaMiddleware = createSagaMiddleware();
 
 const reduxMiddlewares = [
-    routerMiddleware(createMemoryHistory()),
-    sagaMiddleware,
+  routerMiddleware(createMemoryHistory()),
+  sagaMiddleware,
 ];
 
 export default (initialState) => {
-    const store = createStore(
-        combineReducers({
-            gists: gistsReducer,
-            // playlists: playlistReducer,
-        }),
-        initialState,
-        compose(applyMiddleware(...reduxMiddlewares)),
-    );
+  const store = createStore(
+    combineReducers({
+      gists: gistsReducer,
+      // playlists: playlistReducer,
+    }),
+    initialState,
+    compose(applyMiddleware(...reduxMiddlewares)),
+  );
 
-    store.runSaga = sagaMiddleware.run;
+  store.runSaga = sagaMiddleware.run;
 
-    store.close = () => store.dispatch(END);
+  store.close = () => store.dispatch(END);
 
-    return store;
+  return store;
 };

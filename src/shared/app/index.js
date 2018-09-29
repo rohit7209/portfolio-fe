@@ -17,24 +17,25 @@ import * as Routes from './routes';
 // });
 
 const App = () => (
-    <div>
-        <Helmet
-            htmlAttributes={{ lang: 'en', amp: undefined }} // amp takes no value
-            titleTemplate="%s | Universal React POC "
-            titleAttributes={{ itemprop: 'name', lang: 'en' }}
-            meta={[
-                { name: 'description', content: 'Server side rendering example' },
-                { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            ]}
-        />
-        {/* <MainMenu /> */}
-        <Switch>
-            <Route exact path="/" component={Routes.HomePage} />
-            {/* <Route path="/playlists/:playlistId(pl-[a-z]{0,4})" component={Routes.PlaylistPage} />
+  <div>
+    <Helmet
+      htmlAttributes={{ lang: 'en', amp: undefined }} // amp takes no value
+      bodyAttributes={{ style: 'margin: 0px' }}
+      titleTemplate="%s | Universal React POC "
+      titleAttributes={{ itemprop: 'name', lang: 'en' }}
+      meta={[
+        { name: 'description', content: 'Server side rendering example' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      ]}
+    />
+    {/* <MainMenu /> */}
+    <Switch>
+      <Route exact path="/" component={Routes.HomePage} />
+      {/* <Route path="/playlists/:playlistId(pl-[a-z]{0,4})" component={Routes.PlaylistPage} />
             <Route path="/playlists" component={Routes.PlayListsPage} />
             <Route path="/search-album" component={Routes.SearchAlbumPage} />
             <Route path="/albums/:albumSlug" component={Routes.AlbumPage} /> */}
-        </Switch>
-    </div>
+    </Switch>
+  </div>
 );
 export default App;
