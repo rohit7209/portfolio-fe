@@ -4,16 +4,17 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Btn from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
+import CONSTANTS from './../../utils/constants';
 
 const Button = styled(Btn) `
   font-size: ${props => props.hover ? '10px' : '13px'} !important;
-  color: ${props => props.scrolled ? 'black' : 'white'} !important;
+  color: ${props => props.scrolled ? CONSTANTS.themes[0].secondary : CONSTANTS.themes[0].primary} !important;
   height: 60px !important;
   min-width: 110px !important;
   border-radius: 0px !important;
   display: unset !important;
   &:hover{
-    background: ${props => props.scrolled ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)'} !important;
+    background: ${props => props.scrolled ? `${CONSTANTS.themes[0].secondary}10` : `${CONSTANTS.themes[0].primary}10`} !important;
   }
 `;
 

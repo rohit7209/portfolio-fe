@@ -4,10 +4,11 @@ import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import CONSTANTS from './../../utils/constants';
 
 const styles = {
   name: {
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: CONSTANTS.themes[0].primary,
     fontWeight: '100',
     fontSize: '40px',
     left: '100px',
@@ -19,11 +20,10 @@ const styles = {
     background: 'rgba(255, 255, 255, 0.1)',
     padding: '20px',
     borderRadius: '0px',
-    color: 'white',
+    color: CONSTANTS.themes[0].primary,
     top: '480px',
     position: 'absolute',
     left: '100px',
-    // color: 'white',
     textTransform: 'unset',
     '&:hover': {
       background: 'rgba(255, 255, 255, 0.2)',
@@ -56,7 +56,7 @@ const Content = styled.div`
   width: 100%;
   height: 100%;
   opacity: 0.85;
-  background: black;
+  background: ${CONSTANTS.themes[0].secondary};
   color: white;
 `;
 
