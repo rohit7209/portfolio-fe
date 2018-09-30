@@ -9,6 +9,7 @@ export const renderHeader = helmet => `
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <link rel="icon" type="image/png" href="/assets/favicon.ico" />
             <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+            <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' integrity='sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN' crossorigin='anonymous'>
         </head>
         <body ${helmet.bodyAttributes.toString()}>
             <div id="root">

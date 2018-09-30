@@ -9,7 +9,7 @@ import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 import createSagaMiddleware from 'redux-saga';
-
+import combinedReducers from './../shared/app/reducers';
 import App from '../shared/app';
 // import gistReducers from '../shared/home/reducer';
 // import playlistReducer from '../shared/playlists/reducer';
@@ -18,11 +18,12 @@ import sagas from '../shared/home/sagas';
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__;
 
-const reducer = combineReducers({
-  // gists: gistReducers,
-  // playlists: playlistReducer,
-  routing: routerReducer,
-});
+// const reducer = combineReducers({
+//   // gists: gistReducers,
+//   // playlists: playlistReducer,
+//   routing: routerReducer,
+// });
+// combinedReducers.routing = routerReducer;
 
 const history = createHistory();
 const sagaMiddleware = createSagaMiddleware();
@@ -30,7 +31,7 @@ const sagaMiddleware = createSagaMiddleware();
 delete window.__PRELOADED_STATE__;
 
 const store = createStore(
-  reducer,
+  combinedReducers,
   preloadedState,
   compose(
     applyMiddleware(routerMiddleware(history), sagaMiddleware),
