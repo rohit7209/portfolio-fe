@@ -1,33 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import 'particles.js/particles';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import CONSTANTS from './../utils/constants';
 import TopMenu from './../containers/TopMenu';
+import Banner from './../containers/Banner';
+import AboutMe from './../containers/AboutMe';
 
 const Background = styled.div`
-  position: relative;
-  height: 600px;
-`;
-
-const Image = styled.div`
-  position: absolute;
-  z-index: 100;
-  height: 100%;
-  width: 100%;
-  background: url(/assets/images/light-bulb-bg.jpg);
-  background-size: 120% auto;
-  background-position: 0px -50px;
-  // box-shadow: inset 0 0 100px #000000;
-`;
-
-const Content = styled.div`
-  position: absolute;
-  z-index: 200;
   width: 100%;
   height: 100%;
-  opacity: 0.85;
-  background: black;
+  position: fixed;
+  top: 0px;
+  left: 0px;
 `;
 
 class HomePage extends React.Component {
@@ -36,15 +23,19 @@ class HomePage extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    particlesJS.load('particles-js', 'assets/config/particles.json', () => {
+      console.log('callback - particles-js config loaded');
+    });
+  }
+
   render() {
     return (
-      <div>
+      <div style={{ position: 'relative', minHeight: '3000px' }}>
+        <Background id="particles-js" />
         <TopMenu />
-        <Background><Image /><Content /></Background>
-
-        <Button variant="contained" color="primary">abcd</Button>
-        I am home
-        <div style={{ height: '800px', width: '100%' }} />
+        <Banner />
+        <AboutMe />
       </div>
     );
   }

@@ -7,13 +7,13 @@ import Icon from '@material-ui/core/Icon';
 
 const Button = styled(Btn) `
   font-size: ${props => props.hover ? '10px' : '13px'} !important;
-  color: white !important;
+  color: ${props => props.scrolled ? 'black' : 'white'} !important;
   height: 60px !important;
   min-width: 110px !important;
   border-radius: 0px !important;
   display: unset !important;
   &:hover{
-    background: rgba(255, 255, 255, 0.1) !important;
+    background: ${props => props.scrolled ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)'} !important;
   }
 `;
 
@@ -41,7 +41,7 @@ class MenuBtn extends React.Component {
 
   render() {
     return (
-      <Button hover={this.state.hover} onMouseEnter={this.onHover} onMouseLeave={this.onOut}>
+      <Button scrolled={this.props.scrolled} hover={this.state.hover} onMouseEnter={this.onHover} onMouseLeave={this.onOut}>
         {
           this.state.hover ?
             <HoverText>

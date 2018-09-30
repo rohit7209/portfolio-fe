@@ -8,6 +8,7 @@ export const renderHeader = helmet => `
             ${helmet.link.toString()}
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <link rel="icon" type="image/png" href="/assets/favicon.ico" />
+            <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
         </head>
         <body ${helmet.bodyAttributes.toString()}>
             <div id="root">
