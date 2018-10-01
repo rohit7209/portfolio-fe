@@ -10,27 +10,47 @@ import Head from './../../components/Head';
 import Text from './../../components/Text';
 import CONSTANTS from './../../utils/constants';
 
+import Expertise from './Expertise';
+import { isAbsolute } from 'path';
+
 const Container = styled.div`
   text-align: center;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
+`;
+
+const Padder = styled.div`
+  padding: 40px;
+  width: 2800px;
+  height: calc(100% - 80px);
+  position: relative;
 `;
 
 const Wrapper = styled.div`
   height: 100%;
   width: 2800px;
   display: flex;
+  position: relative;
   box-shadow: 0px 0px 25px ${CONSTANTS.themes[0].secondary}30;
 `;
 
 const Tri = styled.div`
   height: 0px;
   width: 0px;
-  border-top: ${props => props.right ? `calc(100vh - 140px) solid ${CONSTANTS.themes[0].secondary}99` : 'none'};
+  border-top: ${props => props.right ? `calc(100vh - 141px) solid ${CONSTANTS.themes[0].secondary}99` : 'none'};
   border-left: ${props => props.right ? 'none' : '140px solid white'};
-  border-right: ${props => props.right ? '150px solid white' : 'none'};
-  border-bottom: ${props => props.right ? 'none' : `calc(100vh - 140px) solid ${CONSTANTS.themes[0].secondary}99`};
+  border-right: ${props => props.right ? '140px solid white' : 'none'};
+  border-bottom: ${props => props.right ? 'none' : `calc(100vh - 141px) solid ${CONSTANTS.themes[0].secondary}99`};
+`;
+
+const TriBack = styled.div`
+  height: 0px;
+  width: 0px;
+  border-top: ${props => props.right ? `calc(100vh - 61px) solid ${CONSTANTS.themes[0].secondary}` : 'none'};
+  border-left: ${props => props.right ? 'none' : '155px solid transparent'};
+  border-right: ${props => props.right ? '155px solid transparent' : 'none'};
+  border-bottom: ${props => props.right ? 'none' : `calc(100vh - 61px) solid ${CONSTANTS.themes[0].secondary}`};
 `;
 
 const TriContainer = styled.div`
@@ -43,45 +63,56 @@ const TriContainer = styled.div`
 `;
 
 class Skills extends React.Component {
-  /** play time 764px to 1500px */
+  /** play time 764px to 2880px approx */
   constructor(props) {
     super(props);
-    this.state = {};
-    this.getLeftMargin = this.getLeftMargin.bind(this);
+    this.state = {
+      marginLeft: 0,
+      marginTop: 0,
+    };
   }
-  /**
-   * 765 = 0
-   * 1500 = 1400
-   */
 
   componentWillMount() {
     console.log(this.props);
   }
 
-  getLeftMargin() {
-    if (this.props.scrollY > 765) {
-      const margin = this.props.scrollY - 765;
-      const maxMargin = this.padder.offsetWidth - window.innerWidth;
-      if (margin < maxMargin) return margin;
-      return maxMargin;
+  componentWillReceiveProps(nextProps) {
+    let marginLeft = 0;
+    let marginTop = 0;
+    if (nextProps.scrollY > 765) {
+      const maxMarginLeft = this.padder.offsetWidth - window.innerWidth;
+      const maxMarginTop = this.container.offsetHeight;
+      marginLeft = nextProps.scrollY - 765;
+      if (marginLeft > maxMarginLeft) {
+        marginTop = marginLeft - maxMarginLeft; // nextProps.scrollY - 2235;
+        marginLeft = maxMarginLeft;
+        if (marginTop > maxMarginTop) marginTop = maxMarginTop;
+      }
     }
-    return 0;
+    this.setState({ marginLeft, marginTop });
   }
 
   render() {
     return (
-      <Container style={{ overflow: 'scroll' }}>
-        <div ref={(node) => { this.padder = node; }} style={{ padding: '40px', width: '2800px', height: 'calc(100% - 80px)', marginLeft: `-${this.getLeftMargin()}px` }}>
+      <Container innerRef={(node) => { this.container = node; }} style={{ marginTop: `-${this.state.marginTop}px` }}>
+        <Padder innerRef={(node) => { this.padder = node; }} style={{ marginLeft: `-${this.state.marginLeft}px` }}>
+          <div style={{ display: 'flex', position: 'absolute', top: '0px', left: '1100px', background: 'none', zIndex: '0' }}>
+            <TriBack left />
+            <div style={{ height: 'calc(100vh - 61px)', width: '350px', background: `${CONSTANTS.themes[0].secondary}` }} />
+            <TriBack right />
+          </div>
           <Wrapper>
-            <div style={{ height: '100%', width: '1100px', background: 'white' }}>a</div>
+            <div style={{ height: '100%', width: '1100px', background: 'white' }}>
+              <Expertise scrollY={this.props.scrollY} />
+            </div>
             <TriContainer style={{ display: 'flex' }}>
               <Tri left />
-              <div style={{ height: '100%', width: '300px', background: `${CONSTANTS.themes[0].secondary}99` }}>b</div>
+              <div style={{ height: '100%', width: '300px', background: `${CONSTANTS.themes[0].secondary}99` }} />
               <Tri right />
             </TriContainer>
             <div style={{ height: '100%', width: '1110px', background: 'white' }}>c</div>
           </Wrapper>
-        </div>
+        </Padder>
       </Container>
     );
   }

@@ -9,6 +9,7 @@ import TopMenu from './../containers/TopMenu';
 import Banner from './../containers/Banner';
 import AboutMe from './../containers/AboutMe';
 import Skills from './../containers/Skills';
+import Expertise from './../containers/Expertise';
 
 import { updateScrollY } from './actions';
 
@@ -47,7 +48,7 @@ class HomePage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('n', nextProps);
+    // console.log('n', nextProps);
   }
 
   handleScrollEvent(e) {
@@ -59,13 +60,14 @@ class HomePage extends React.Component {
   render() {
     // console.log(this.props);
     return (
-      <div style={{ position: 'relative', minHeight: '4000px' }}>
+      <div style={{ position: 'relative', minHeight: '6000px' }}>
         <Background id="particles-js" />
         <TopMenu />
         <Banner />
         <AboutMe />
         <ContentContainer fixed={this.state.scrollY > 764}>
           <Skills scrollY={this.state.scrollY} />
+          <Expertise />
         </ContentContainer>
       </div>
     );
