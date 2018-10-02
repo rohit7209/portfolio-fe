@@ -9,7 +9,7 @@ import TopMenu from './../containers/TopMenu';
 import Banner from './../containers/Banner';
 import AboutMe from './../containers/AboutMe';
 import Skills from './../containers/Skills';
-import Expertise from './../containers/Expertise';
+import LifeStages from './../containers/LifeStages';
 
 import { updateScrollY } from './actions';
 
@@ -67,7 +67,7 @@ class HomePage extends React.Component {
         <AboutMe />
         <ContentContainer fixed={this.state.scrollY > 764}>
           <Skills scrollY={this.state.scrollY} />
-          <Expertise />
+          <LifeStages />
         </ContentContainer>
       </div>
     );

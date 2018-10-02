@@ -11,7 +11,7 @@ import Text from './../../components/Text';
 import CONSTANTS from './../../utils/constants';
 
 import Expertise from './Expertise';
-import { isAbsolute } from 'path';
+import Technologies from './Technologies';
 
 const Container = styled.div`
   text-align: center;
@@ -33,6 +33,12 @@ const Wrapper = styled.div`
   display: flex;
   position: relative;
   box-shadow: 0px 0px 25px ${CONSTANTS.themes[0].secondary}30;
+`;
+
+const Content = styled.div`
+  height: 100%;
+  width: 1100px;
+  background: white;
 `;
 
 const Tri = styled.div`
@@ -102,15 +108,17 @@ class Skills extends React.Component {
             <TriBack right />
           </div>
           <Wrapper>
-            <div style={{ height: '100%', width: '1100px', background: 'white' }}>
+            <Content>
               <Expertise scrollY={this.props.scrollY} />
-            </div>
+            </Content>
             <TriContainer style={{ display: 'flex' }}>
               <Tri left />
               <div style={{ height: '100%', width: '300px', background: `${CONSTANTS.themes[0].secondary}99` }} />
               <Tri right />
             </TriContainer>
-            <div style={{ height: '100%', width: '1110px', background: 'white' }}>c</div>
+            <Content>
+              <Technologies scrollY={this.props.scrollY} marginTop={this.state.marginTop} />
+            </Content>
           </Wrapper>
         </Padder>
       </Container>
