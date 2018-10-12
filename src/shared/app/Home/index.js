@@ -10,6 +10,7 @@ import Banner from './../containers/Banner';
 import AboutMe from './../containers/AboutMe';
 import Skills from './../containers/Skills';
 import LifeStages from './../containers/LifeStages';
+import Footer from './../containers/Footer';
 
 import { updateScrollY } from './actions';
 
@@ -60,14 +61,15 @@ class HomePage extends React.Component {
   render() {
     // console.log(this.props);
     return (
-      <div style={{ position: 'relative', minHeight: '6000px' }}>
+      <div style={{ position: 'relative', minHeight: '6200px' }}>
         <Background id="particles-js" />
         <TopMenu />
         <Banner />
         <AboutMe />
         <ContentContainer fixed={this.state.scrollY > 764}>
           <Skills scrollY={this.state.scrollY} />
-          <LifeStages />
+          <LifeStages scrollY={this.state.scrollY} />
+          <Footer scrollY={this.state.scrollY} />
         </ContentContainer>
       </div>
     );
