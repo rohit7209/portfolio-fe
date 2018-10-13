@@ -63,16 +63,16 @@ const FirstCol = styled.div`
   // border: 1px solid red;
 `;
 const SecondCol = styled.div`
-  width: calc(50% - 0px);
+  width: calc(40% - 0px);
   // border: 1px solid green;
   display: table;
   min-height: 170px;
   text-align: center;
 `;
 const ThirdCol = styled.div`
-  width: calc(20% - 0px);
+  width: calc(30% - 0px);
   // border: 1px solid yellow;
-  &>a{
+  & a{
     text-decoration: none;
   }
 `;
@@ -140,13 +140,15 @@ class Footer extends React.Component {
             }}>Want to hire me ?</Button>
           </div>
         </SecondCol>
-        <ThirdCol>
-          NAVIGATE
-          <a href="#"><Link>Home <FontAwesome name="angle-double-right" /></Link></a>
-          <a href="#"><Link>Services <FontAwesome name="angle-double-right" /></Link></a>
-          <a href="#"><Link>Contact <FontAwesome name="angle-double-right" /></Link></a>
-          <a href="#"><Link>Hire Me <FontAwesome name="angle-double-right" /></Link></a>
-          <a href="#"><Link>Fund me <FontAwesome name="angle-double-right" /></Link></a>
+        <ThirdCol >
+          <div style={{ paddingLeft: '200px' }}>
+            NAVIGATE
+            <a href="#"><Link>Home <FontAwesome name="angle-double-right" /></Link></a>
+            <a href="#"><Link>Services <FontAwesome name="angle-double-right" /></Link></a>
+            <a href="#"><Link>Contact <FontAwesome name="angle-double-right" /></Link></a>
+            <a href="#"><Link>Hire Me <FontAwesome name="angle-double-right" /></Link></a>
+            <a href="#"><Link>Fund me <FontAwesome name="angle-double-right" /></Link></a>
+          </div>
         </ThirdCol>
         <div style={{ height: '1px', width: '100%', background: CONSTANTS.themes[0].secondary, margin: '5px auto' }} />
         <div style={{ textAlign: 'center', fontSize: '13px', width: '100%' }}>&copy; 2018 All rights reserved. Designed and developed by Rohit Sharma.</div>

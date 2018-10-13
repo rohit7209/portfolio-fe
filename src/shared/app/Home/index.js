@@ -11,6 +11,7 @@ import AboutMe from './../containers/AboutMe';
 import Skills from './../containers/Skills';
 import LifeStages from './../containers/LifeStages';
 import Footer from './../containers/Footer';
+import SmallScreen from './../containers/SmallScreen';
 
 import { updateScrollY } from './actions';
 
@@ -36,20 +37,23 @@ class HomePage extends React.Component {
     super(props);
     this.state = {
       scrollY: 0,
+      windowWidth: 0,
     };
     this.handleScrollEvent = this.handleScrollEvent.bind(this);
   }
 
   componentDidMount() {
-    particlesJS.load('particles-js', 'assets/config/particles.json', () => {
-      console.log('callback - particles-js config loaded');
-      // window.scrollTo(0, 0);
-    });
+    particlesJS.load('particles-js', 'assets/config/particles.json', () => { });
+    this.setState({ windowWidth: window.innerWidth });
     window.addEventListener('scroll', this.handleScrollEvent);
+    window.addEventListener('resize', (e) => {
+      this.setState({ windowWidth: e.target.innerWidth });
+    });
   }
 
-  componentWillReceiveProps(nextProps) {
-    // console.log('n', nextProps);
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScrollEvent);
+    window.removeEventListener('resize');
   }
 
   handleScrollEvent(e) {
@@ -60,8 +64,9 @@ class HomePage extends React.Component {
 
   render() {
     // console.log(this.props);
-    return (
-      <div style={{ position: 'relative', minHeight: '6200px' }}>
+    // console.log('state:', this.state);
+    return (this.state.windowWidth === 0 || this.state.windowWidth > 1023) ?
+      <div style={{ position: 'relative', minHeight: '6100px' }}>
         <Background id="particles-js" />
         <TopMenu />
         <Banner />
@@ -72,7 +77,8 @@ class HomePage extends React.Component {
           <Footer scrollY={this.state.scrollY} />
         </ContentContainer>
       </div>
-    );
+      :
+      <SmallScreen />;
   }
 }
 
