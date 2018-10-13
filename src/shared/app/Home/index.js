@@ -40,6 +40,7 @@ class HomePage extends React.Component {
       windowWidth: 0,
     };
     this.handleScrollEvent = this.handleScrollEvent.bind(this);
+    this.refresh = this.refresh.bind(this);
   }
 
   componentDidMount() {
@@ -62,10 +63,16 @@ class HomePage extends React.Component {
     // console.log(window.scrollY);
   }
 
+  refresh() {
+    this.setState({ refresh: !this.state.refresh });
+  }
+
   render() {
     // console.log(this.props);
     // console.log('state:', this.state);
-    return (this.state.windowWidth === 0 || this.state.windowWidth > 1023) ?
+    // console.log(document.cookie, document.cookie.includes('__show_unsupported_content=true'));
+
+    return (this.state.windowWidth === 0 || this.state.windowWidth > 1023 || document.cookie.includes('__show_unsupported_content=true')) ?
       <div style={{ position: 'relative', minHeight: '6100px' }}>
         <Background id="particles-js" />
         <TopMenu />
@@ -78,7 +85,7 @@ class HomePage extends React.Component {
         </ContentContainer>
       </div>
       :
-      <SmallScreen />;
+      <SmallScreen refresh={this.refresh} />;
   }
 }
 

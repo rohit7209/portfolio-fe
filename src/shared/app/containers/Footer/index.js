@@ -94,7 +94,7 @@ class Footer extends React.Component {
   }
 
   render() {
-    console.log(this.props.scrollY);
+    // console.log(this.props.scrollY);
 
     const scrollY = this.props.scrollY;
 
