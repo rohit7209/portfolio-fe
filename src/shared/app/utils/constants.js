@@ -1,5 +1,5 @@
 export default {
-  server_url: 'http://rohitsharma.online',
+  config: process.env.APP_CONFIG,
   themes: [
     {
       primary: '#d6d6d6', // 143, 143, 143

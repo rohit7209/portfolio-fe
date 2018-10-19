@@ -17,7 +17,6 @@ export default (state = initialState, action) => {
         requesting: true,
       };
     case SAVE_EMAIL_DONE:
-      console.log(action);
       return {
         ...state,
         requesting: false,

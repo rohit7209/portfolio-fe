@@ -5,7 +5,8 @@ import {
 } from './constants';
 import { saveEmailDone, handleError } from './actions';
 
-function saveEmailAPICall() {
+function saveEmailAPICall(payload) {
+  console.log('pay::', payload);
   return fetch('https://api.github.com/gists', {
     method: 'get',
     headers: {
@@ -18,9 +19,9 @@ function saveEmailAPICall() {
   });
 }
 
-function* saveEmailFlow() {
+function* saveEmailFlow(action) {
   try {
-    const response = yield call(saveEmailAPICall);
+    const response = yield call(saveEmailAPICall, action.payload);
     yield put(saveEmailDone(response));
   } catch (error) {
     yield put(handleError(error));

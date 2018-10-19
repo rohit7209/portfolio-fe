@@ -6,6 +6,8 @@ const webpack = require('webpack');
 const srcPath = path.resolve(__dirname, 'src');
 const distPath = path.resolve(__dirname, 'dist');
 
+const configJSON = require(path.resolve(__dirname, 'config/app.json'));
+
 const plugins = [
   new HTMLWebpackPlugin({
     title: 'Get real playlists to share with Spotify',
@@ -16,7 +18,10 @@ const plugins = [
     minChunks: Infinity,
   }),
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': '"production"',
+    'process.env': {
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      APP_CONFIG: JSON.stringify(configJSON[process.env.NODE_ENV]),
+    },
   }),
 ];
 

@@ -13,7 +13,7 @@ import CONSTANTS from './../../utils/constants';
 
 const Container = styled.div`
   background: rgba(0,0,0,0.85);
-  padding: 50px 20px;
+  padding: 50px 20px 8px 20px;
   color: ${CONSTANTS.themes[0].primary}99;
   position: relative;
   display: flex;
