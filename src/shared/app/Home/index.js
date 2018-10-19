@@ -75,7 +75,7 @@ class HomePage extends React.Component {
     return (this.state.windowWidth === 0 || this.state.windowWidth > 1023 || document.cookie.includes('__show_unsupported_content=true')) ?
       <div style={{ position: 'relative', minHeight: '6100px' }}>
         <Background id="particles-js" />
-        <TopMenu />
+        <TopMenu transparent />
         <Banner />
         <AboutMe />
         <ContentContainer fixed={this.state.scrollY > 764}>

@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import FontAwesome from 'react-fontawesome';
 import Btn from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import CONSTANTS from './../../utils/constants';
+
+import { saveEmail } from './actions';
 
 const Container = styled.div`
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
@@ -35,7 +38,17 @@ const Button = styled(Btn) `
 class EmailPhoneInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      text: '',
+    };
+  }
+
+  componentWillMount() {
+    this.props.saveEmail();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('next:', nextProps);
   }
 
   render() {
@@ -50,5 +63,11 @@ class EmailPhoneInput extends React.Component {
 
 EmailPhoneInput.propTypes = {};
 
-export default EmailPhoneInput;
+const mapStateToProps = state => ({
+  store: state.saveEmailReducer,
+  state,
+});
 
+export default connect(mapStateToProps, { saveEmail })(EmailPhoneInput);
+
+// export default (HomePage);

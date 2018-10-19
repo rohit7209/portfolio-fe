@@ -4,20 +4,27 @@ import { Route, Switch } from 'react-router-dom';
 import Helmet from 'react-helmet';
 
 import * as Routes from './routes';
-// import MainMenu from './mainMenu';
 
-// const styleSheet = createStyleSheet('ButtonAppBar', {
-//     root: {
-//         marginTop: 30,
-//         width: '100%',
-//     },
-//     flex: {
-//         flex: 1,
-//     },
-// });
+// const Router = (props) => {
+//   console.log('props:', props);
+//   switch (props.location.pathname) {
+//     case '/':
+//       return <Routes.HomePage {...props} />;
+//     case '/sign':
+//     default:
+//       return <Routes.HomePage {...props} />;
+//   }
+// };
 
-const App = () => (
-  <div>
+// Router.propTypes = {};
+
+/* <Route path="/playlists/:playlistId(pl-[a-z]{0,4})" component={Routes.PlaylistPage} />
+            <Route path="/playlists" component={Routes.PlayListsPage} />
+            <Route path="/search-album" component={Routes.SearchAlbumPage} />
+            <Route path="/albums/:albumSlug" component={Routes.AlbumPage} /> */
+
+const App = (props, e) => {
+  return (<div>
     <Helmet
       htmlAttributes={{ lang: 'en', amp: undefined }} // amp takes no value
       bodyAttributes={{ style: 'margin: 0px' }}
@@ -31,11 +38,10 @@ const App = () => (
     {/* <MainMenu /> */}
     <Switch>
       <Route exact path="/" component={Routes.HomePage} />
-      {/* <Route path="/playlists/:playlistId(pl-[a-z]{0,4})" component={Routes.PlaylistPage} />
-            <Route path="/playlists" component={Routes.PlayListsPage} />
-            <Route path="/search-album" component={Routes.SearchAlbumPage} />
-            <Route path="/albums/:albumSlug" component={Routes.AlbumPage} /> */}
+      <Route exact path="/signin" component={Routes.Signin} />
     </Switch>
-  </div>
-);
+  </div>);
+};
+
+
 export default App;

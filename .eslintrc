@@ -10,25 +10,54 @@
         "beforeEach": true,
         "afterEach": true,
         "before": true,
-        "after": true,
+        "after": true
     },
     "parser": "babel-eslint",
     "rules": {
-        "max-len": ["warn", { "code": 200 }],
+        "max-len": [
+            "warn",
+            {
+                "code": 200
+            }
+        ],
         "func-names": "off",
-        "indent": ["error", 2, {
-            "SwitchCase": 1
-        }],
+        "indent": [
+            "error",
+            2,
+            {
+                "SwitchCase": 1
+            }
+        ],
         "no-confusing-arrow": "off",
         "no-plusplus": "off",
-        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+        "no-nested-ternary": "off",
+        "no-underscore-dangle": "off",
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": true
+            }
+        ],
         "import/no-named-as-default": "off",
         "import/prefer-default-export": "off",
         "react/jsx-filename-extension": "off",
-        "react/jsx-indent": ["error", 2],
-        "react/jsx-indent-props": ["error", 2],
+        "react/jsx-indent": [
+            "error",
+            2
+        ],
+        "react/jsx-indent-props": [
+            "error",
+            2
+        ],
         "react/forbid-prop-types": "on",
         "jsx-a11y/href-no-hash": "on",
-        "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }]
+        "jsx-a11y/anchor-is-valid": [
+            "warn",
+            {
+                "aspects": [
+                    "invalidHref"
+                ]
+            }
+        ]
     }
 }

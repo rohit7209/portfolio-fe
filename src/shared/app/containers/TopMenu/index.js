@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import MenuBtn from './MenuBtn';
+import CONSTANTS from './../../utils/constants';
 
 const Container = styled.div`
   width: 100%;
@@ -10,7 +11,7 @@ const Container = styled.div`
   justify-content: space-between;
   z-index: 1000;
   top: 0px;
-  background: ${props => props.scrolled ? 'white' : 'transparent'};
+  background: ${props => props.scrolled ? 'white' : props.transparent ? 'transparent' : CONSTANTS.themes[0].secondary};
   box-shadow: ${props => props.scrolled ? '2px 0px 5px rgba(0,0,0, 0.4)' : 'none'}; 
 `;
 
@@ -31,7 +32,7 @@ class TopMenu extends React.Component {
 
   render() {
     return (
-      <Container scrolled={this.state.scrolled} >
+      <Container scrolled={this.state.scrolled} transparent={this.props.transparent} >
         <div />
         <div>
           <MenuBtn scrolled={this.state.scrolled} icon="home" text="HOME" />
