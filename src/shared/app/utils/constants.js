@@ -1,5 +1,8 @@
 export default {
   config: process.env.APP_CONFIG,
+  api: {
+    saveEmail: '/saveEmail',
+  },
   themes: [
     {
       primary: '#d6d6d6', // 143, 143, 143

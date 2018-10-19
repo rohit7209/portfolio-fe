@@ -4,15 +4,21 @@ import {
   SAVE_EMAIL,
 } from './constants';
 import { saveEmailDone, handleError } from './actions';
+import CONSTANTS from './../../utils/constants';
 
 function saveEmailAPICall(payload) {
   console.log('pay::', payload);
-  return fetch('https://api.github.com/gists', {
-    method: 'get',
+  const { email } = payload;
+  const URL = `${CONSTANTS.config.server_url}${CONSTANTS.api.saveEmail}`;
+
+  console.log('URL:', URL);
+
+  return fetch(URL, {
+    method: 'POST',
     headers: {
-      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify({ email }),
   }).then((response) => {
     if (!response.ok) throw new Error();
     return response.json();

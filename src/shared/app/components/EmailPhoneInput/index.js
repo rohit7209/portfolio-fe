@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import FontAwesome from 'react-fontawesome';
 import Btn from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import CONSTANTS from './../../utils/constants';
@@ -52,14 +51,10 @@ class EmailPhoneInput extends React.Component {
     this.saveEmail = this.saveEmail.bind(this);
   }
 
-  componentWillMount() {
-    console.log('asd::', CONSTANTS);
-    // this.props.saveEmail();
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.store !== this.props.store && nextProps.store.completed) {
       setTimeout(() => {
+        this.setState({ email: '', error: '' });
         this.props.reset();
       }, 1000);
     }
@@ -85,7 +80,7 @@ class EmailPhoneInput extends React.Component {
       <Container>
         <div style={{ display: 'flex' }}>
           <Input type="text" value={this.state.email} onChange={this.updateEmail} />
-          <Button onClick={this.saveEmail}>{(this.props.store.requesting) ? <FontAwesome name="circl-o-notch" spin /> : <Icon>send</Icon>}</Button>
+          <Button onClick={this.saveEmail}>{(this.props.store.requesting) ? <Icon className="fa fa-circle-o-notch fa-spin" style={{ fontSize: '13px' }} /> : <Icon>send</Icon>}</Button>
         </div>
         <Error>{this.state.error}</Error>
       </Container>
