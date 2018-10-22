@@ -10,6 +10,7 @@ function saveEmailAPICall(payload) {
   console.log('pay::::::', payload);
   const { email } = payload;
   console.log('email::::::', email);
+  console.log(CONSTANTS);
   const URL = `${CONSTANTS.config.server_url}${CONSTANTS.api.saveEmail}`;
   console.log('url:::::', URL);
   return fetch(URL, {
