@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Helmet from 'react-helmet';
 // import 'react-notifications/src/notifications.scss';
-import 'react-notifications/lib/notifications.css';
-import './../../assets/stylesheets/notifications.css';
+// import 'react-notifications/lib/notifications.css';
+// import './../../assets/stylesheets/notifications.css';
 
 
 import * as Routes from './routes';
