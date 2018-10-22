@@ -7,7 +7,7 @@ import Wrapper from '../Wrapper';
 const Container = styled.div`
   background: red;
   padding: 20px;
-  min-height: 600px;
+  min-height: 2000px;
 
 `;
 
