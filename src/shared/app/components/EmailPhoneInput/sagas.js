@@ -7,8 +7,10 @@ import { saveEmailDone, handleError } from './actions';
 import CONSTANTS from './../../utils/constants';
 
 function saveEmailAPICall(payload) {
+  console.log('pay::', payload);
   const { email } = payload;
   const URL = `${CONSTANTS.config.server_url}${CONSTANTS.api.saveEmail}`;
+  console.log('url:::::', URL);
   return fetch(URL, {
     method: 'POST',
     headers: {
@@ -16,6 +18,7 @@ function saveEmailAPICall(payload) {
     },
     body: JSON.stringify({ email }),
   }).then((response) => {
+    console.log('response:::', response);
     if (!response.ok) throw new Error();
     return response.json();
   });

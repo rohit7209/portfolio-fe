@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Btn from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
+// import { NotificationContainer, NotificationManager } from 'react-notifications';
 import CONSTANTS from './../../utils/constants';
 
 import { saveEmail, reset } from './actions';
@@ -46,12 +46,6 @@ const Error = styled.div`
   padding: 3px;
 `;
 
-// const Name = styled.div`
-
-// `;
-
-// console.log('name:', Name.className);
-
 class EmailPhoneInput extends React.Component {
   constructor(props) {
     super(props);
@@ -64,8 +58,9 @@ class EmailPhoneInput extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('next::', nextProps);
     if (nextProps.store !== this.props.store && nextProps.store.completed) {
-      NotificationManager.info('Email saved successfully', '', 5000);
+      // NotificationManager.info('Email saved successfully', '', 5000);
       this.setState({ email: '', error: '' });
       this.props.reset();
     }
@@ -94,7 +89,7 @@ class EmailPhoneInput extends React.Component {
           <Button onClick={this.saveEmail}>{(this.props.store.requesting) ? <Icon className="fa fa-circle-o-notch fa-spin" style={{ fontSize: '13px' }} /> : <Icon>send</Icon>}</Button>
         </div>
         <Error>{this.state.error}</Error>
-        <NotificationContainer style={{ color: 'red', background: 'green' }} />
+        {/* <NotificationContainer style={{ color: 'red', background: 'green' }} /> */}
       </Container>
     );
   }

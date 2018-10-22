@@ -44,7 +44,7 @@ class HomePage extends React.Component {
   }
 
   componentDidMount() {
-    particlesJS.load('particles-js', 'assets/config/particles.json', () => { });
+    // particlesJS.load('particles-js', 'http://rohitsharma.xyz/assets/config/particles.json', () => { });
     this.setState({ windowWidth: window.innerWidth });
     window.addEventListener('scroll', this.handleScrollEvent);
     window.addEventListener('resize', (e) => {
