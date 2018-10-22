@@ -7,8 +7,9 @@ import { saveEmailDone, handleError } from './actions';
 import CONSTANTS from './../../utils/constants';
 
 function saveEmailAPICall(payload) {
-  console.log('pay::', payload);
+  console.log('pay::::::', payload);
   const { email } = payload;
+  console.log('email::::::', email);
   const URL = `${CONSTANTS.config.server_url}${CONSTANTS.api.saveEmail}`;
   console.log('url:::::', URL);
   return fetch(URL, {
