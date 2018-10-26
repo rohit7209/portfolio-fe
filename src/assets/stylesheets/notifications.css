@@ -1,6 +1,4 @@
-/* .notification {
-  background: white;
-  color: red;
-} */
-
-/* notification-info */
+.notification-container{
+  top: 60px;
+  padding: 10px 15px;
+}

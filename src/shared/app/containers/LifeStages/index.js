@@ -122,7 +122,7 @@ class Journey extends React.Component {
       top = (4500 - scrollY) / 3;
       if (scale < 0.6) {
         scale = 0.6;
-        top = -140;
+        top = -133;
       }
     }
     // console.log('yy:', scale, top);// 2595 3340 3500

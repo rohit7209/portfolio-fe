@@ -3,6 +3,8 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const path = require('path');
 const webpack = require('webpack');
 
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 const srcPath = path.resolve(__dirname, 'src');
 const distPath = path.resolve(__dirname, 'dist');
 
@@ -25,6 +27,7 @@ const plugins = [
       APP_CONFIG: JSON.stringify(configJSON[process.env.NODE_ENV]),
     },
   }),
+  new ExtractTextPlugin("styles.css"),
 ];
 
 if (process.env.NODE_ENV === 'analyse') {
@@ -59,16 +62,23 @@ module.exports = {
       //   test: /\.css$/,
       //   use: ['style-loader', 'css-loader'],
       // },
-      // {
-      //   test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-      //   use: [{
-      //     loader: 'file-loader',
-      //     options: {
-      //       name: '[name].[ext]',
-      //       outputPath: 'fonts/',
-      //     },
-      //   }],
-      // },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader'],
+        }),
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'fonts/',
+          },
+        }],
+      },
     ],
   },
   devServer: {
