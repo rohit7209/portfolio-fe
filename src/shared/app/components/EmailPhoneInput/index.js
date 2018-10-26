@@ -59,9 +59,9 @@ class EmailPhoneInput extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('next::', nextProps);
+    // console.log('next::', nextProps);
     if (nextProps.store !== this.props.store && nextProps.store.completed) {
-      NotificationManager.info('Email saved successfully', '', 500000);
+      NotificationManager.info('Email saved successfully', '', 5000);
       this.setState({ email: '', error: '' });
       this.props.reset();
     }
