@@ -8,6 +8,8 @@ const distPath = path.resolve(__dirname, 'dist');
 
 const configJSON = require(path.resolve(__dirname, 'config/app.json'));
 
+// console.log('process::', configJSON[process.env.NODE_ENV]);
+
 const plugins = [
   new HTMLWebpackPlugin({
     title: 'Get real playlists to share with Spotify',

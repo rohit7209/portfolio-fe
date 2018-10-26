@@ -1,20 +1,29 @@
 {
-    "apps" : [
+    "apps": [
         {
             "name": "portfolio-server",
             "exec_mode": "fork_mode",
             "script": "dist/server.js",
-            "watch": ["dist"]
+            "watch": ["dist"],
+            "env": {
+                "NODE_ENV": "production"
+            }
         },
         {
             "name": "portfolio-build-server",
             "script": "./node_modules/.bin/webpack",
-            "args" : "--config webpack.server.config.js --watch"
+            "args": "--config webpack.server.config.js --watch",
+            "env": {
+                "NODE_ENV": "production"
+            }
         },
         {
             "name": "portfolio-build-client",
             "script": "./node_modules/.bin/webpack",
-            "args" : "--config webpack.client.config.js --watch"
+            "args": "--config webpack.client.config.js --watch",
+            "env": {
+                "NODE_ENV": "production"
+            }
         }
     ]
 }
