@@ -1,54 +1,80 @@
 /* eslint-disable no-console */
 import express from 'express';
 import React from 'react';
-import { renderToNodeStream } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
-import { getLoadableState } from 'loadable-components/server';
-import { Provider } from 'react-redux';
-import { Helmet } from 'react-helmet';
+import { renderToString } from 'react-dom/server';
 
-import App from '../shared/app';
+import Loadable from 'react-loadable';
+import { getBundles } from 'react-loadable/webpack';
+import { ServerStyleSheet } from 'styled-components';
+import { StaticRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+import stats from './../../react-loadable.json';
+
+import App from './../app';
 import configureStore from './store';
 import { renderHeader, renderFooter } from './render';
 
-import sagas from './../shared/app/rootSaga';
+import sagas from './../app/rootSaga';
 
 const app = express();
-app.use('/', express.static('./dist'));
+app.use('/assets', express.static('./dist/assets'));
+
+if (typeof window === 'undefined') {
+  global.window = {};
+}
+if (typeof document === 'undefined') {
+  global.document = {};
+}
 
 app.get('*', async (req, res) => {
+  // creating an empty store
+  // console.log('req::', req.path);
   const store = configureStore();
   const context = {};
-  const appWithRouter = (
-    <Provider store={store}>
-      <StaticRouter location={req.url} context={context}>
-        <App />
-      </StaticRouter>
-    </Provider>
-  );
 
+  const modules = [];
+  const htmlStream = renderToString(
+    <Loadable.Capture report={moduleName => modules.push(moduleName)}>
+      <Provider store={store}>
+        <StaticRouter location={req.path} context={context}>
+          {/* {renderRoutes(routes)} */}
+          <App />
+          {/* <div>{renderRoutes(routes)}</div> */}
+        </StaticRouter>
+      </Provider>
+    </Loadable.Capture>);
+
+  const bundles = getBundles(stats, modules);
+
+  // console.log('context::', context);
+
+  // if redirect context is set redirect to set url
   if (context.url) {
     res.redirect(context.url);
     return;
   }
-  let loadableState = {};
 
+  // inject all the sagas
   store.runSaga(sagas).done.then(() => {
-    const helmet = Helmet.renderStatic();
-    res.status(200).write(renderHeader(helmet));
+    // getting reference from styled-components to get all the styles
+    const sheet = new ServerStyleSheet();
 
+    // writing HTML stream in response
+    const styleTags = sheet.getStyleTags(); // or sheet.getStyleElement();
+
+    // creating header
+    // const header = Helmet.renderStatic();
+
+    // get the state of store, this state will be passed to client side
     const preloadedState = store.getState();
 
-    const htmlSteam = renderToNodeStream(appWithRouter);
-    htmlSteam.pipe(res, { end: false });
-    htmlSteam.on('end', () => {
-      res.write(renderFooter(loadableState, preloadedState));
-      return res.send();
-    });
+    return res.status(200).send(renderHeader(styleTags) + htmlStream + renderFooter(bundles, preloadedState));
   });
-
-  loadableState = await getLoadableState(appWithRouter);
   store.close();
 });
 
-app.listen(3000, () => console.log('App listening on port 3000'));
+Loadable.preloadAll().then(() => {
+  app.listen(3000, () => console.log('App listening on port 3000'));
+});
+

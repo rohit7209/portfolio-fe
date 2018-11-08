@@ -6,11 +6,17 @@ help: ## Display available commands
 install: ## Setup all project dependencies
 	npm i
 
-dev: ## Start webpack-dev-server
+hot: ## Start webpack-dev-server
 	npm run dev-server
 
-start: build ## Start server for SSR
+## Start server in dev mode for SSR
+dev: start-dev logs
+
+start-dev: build ## Start server in dev mode for SSR
 	./node_modules/.bin/pm2 start config/pm2/development.json
+
+start: build ## Start server for SSR in production
+	./node_modules/.bin/pm2 start config/pm2/production.json
 
 stop: ## Start SSR server
 	./node_modules/.bin/pm2 delete config/pm2/development.json

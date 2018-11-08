@@ -2,9 +2,8 @@
 import express from 'express';
 import React from 'react';
 import { renderToNodeStream } from 'react-dom/server';
+import { ServerStyleSheet } from 'styled-components';
 import { StaticRouter } from 'react-router-dom';
-// import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-// import createPalette from 'material-ui/styles/palette';
 import { getLoadableState } from 'loadable-components/server';
 import { Provider } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -15,60 +14,71 @@ import { renderHeader, renderFooter } from './render';
 
 import sagas from './../shared/app/rootSaga';
 
-// const createStyleManager = () =>
-//     MuiThemeProvider.createDefaultContext({
-//         theme: createMuiTheme({
-//             palette: createPalette({
-//                 type: 'light',
-//             }),
-//         }),
-//     });
-
 const app = express();
-app.use('/', express.static('./dist'));
+app.use('/assets', express.static('./dist/assets'));
+
+if (typeof window === 'undefined') {
+  global.window = {};
+}
+if (typeof document === 'undefined') {
+  global.document = {};
+}
 
 app.get('*', async (req, res) => {
+  // creating an empty store
   const store = configureStore();
   const context = {};
-  // const { styleManager, theme } = createStyleManager();
 
+  // connecting store and router with App
   const appWithRouter = (
-    // <MuiThemeProvider>
     <Provider store={store}>
       <StaticRouter location={req.url} context={context}>
         <App />
       </StaticRouter>
     </Provider>
-    // </MuiThemeProvider>
   );
 
+  // if redirect context is set redirect to set url
   if (context.url) {
     res.redirect(context.url);
     return;
   }
+
+  // initialising loadable state
   let loadableState = {};
 
+  // inject all the sagas
   store.runSaga(sagas).done.then(() => {
-    const helmet = Helmet.renderStatic();
-    res.status(200).write(renderHeader(helmet));
+    // getting reference from styled-components to get all the styles
+    const sheet = new ServerStyleSheet();
 
+    // converting App to HTML stream & getting style from styled-components
+    const htmlStream = renderToNodeStream(sheet.collectStyles(appWithRouter));
+
+    // writing HTML stream in response
+    const styleTags = sheet.getStyleTags(); // or sheet.getStyleElement();
+
+    // creating header
+    const header = Helmet.renderStatic();
+
+    // writing HTML header in response (its not response header)
+    res.status(200).write(renderHeader(header, styleTags));
+
+    // get the state of store, this state will be passed to client side
     const preloadedState = store.getState();
-    // const css = styleManager.sheetsToString();
 
-    const htmlSteam = renderToNodeStream(appWithRouter);
-    htmlSteam.pipe(res, { end: false });
-    htmlSteam.on('end', () => {
+    htmlStream.pipe(res, { end: false });
+    htmlStream.on('end', () => {
+      // once writing done, HTML footer is added (loadableState: script tags to import required components, preloadedState: current store state)
       res.write(renderFooter(loadableState, preloadedState));
       return res.send();
     });
   });
 
-  // Trigger sagas for component to run
-  // https://github.com/yelouafi/redux-saga/issues/255#issuecomment-210275959
+  // getting scripts for all the imported components (which are loadable)
   loadableState = await getLoadableState(appWithRouter);
-
-  // Dispatch a close event so sagas stop listening after they're resolved
   store.close();
 });
 
-app.listen(3000, () => console.log('Demo app listening on port 3000'));
+
+app.listen(3000, () => console.log('App listening on port 3000'));

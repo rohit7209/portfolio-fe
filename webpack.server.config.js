@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: distPath,
     filename: 'server.js',
-    publicPath: '/',
+    publicPath: '/assets/',
   },
   target: 'node',
   node: {

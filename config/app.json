@@ -1,6 +1,7 @@
 {
   "development": {
-    "server_url": "http://localhost:8080"
+    "server_url1": "http://localhost:8080",
+    "server_url": "http://rohitsharma.xyz/api"
   },
   "production": {
     "server_url": "http://rohitsharma.xyz/api"

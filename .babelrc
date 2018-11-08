@@ -8,8 +8,10 @@
             "polyfill": false,
             "regenerator": true,
             "moduleName": "babel-runtime"
-        }]
+        }],
+        ["babel-plugin-styled-components"]
     ],
+    
     "presets": [
         "react",
         [

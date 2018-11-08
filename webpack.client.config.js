@@ -4,9 +4,10 @@ const path = require('path');
 const webpack = require('webpack');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ReactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugin;
 
 const srcPath = path.resolve(__dirname, 'src');
-const distPath = path.resolve(__dirname, 'dist');
+const distPath = path.resolve(__dirname, 'dist/assets');
 
 const configJSON = require(path.resolve(__dirname, 'config/app.json'));
 
@@ -14,7 +15,7 @@ const configJSON = require(path.resolve(__dirname, 'config/app.json'));
 
 const plugins = [
   new HTMLWebpackPlugin({
-    title: 'Get real playlists to share with Spotify',
+    title: 'Rohit Sharma',
     template: path.resolve(__dirname, 'src/client/index.ejs'),
   }),
   new webpack.optimize.CommonsChunkPlugin({
@@ -27,12 +28,11 @@ const plugins = [
       APP_CONFIG: JSON.stringify(configJSON[process.env.NODE_ENV]),
     },
   }),
-  new ExtractTextPlugin("styles.css"),
+  new ExtractTextPlugin('styles.css'),
+  new ReactLoadablePlugin({
+    filename: './react-loadable.json',
+  }),
 ];
-
-if (process.env.NODE_ENV === 'analyse') {
-  plugins.push(new BundleAnalyzerPlugin());
-}
 
 module.exports = {
   context: srcPath,
@@ -43,8 +43,10 @@ module.exports = {
   },
   output: {
     path: distPath,
-    filename: '[name].js',
-    publicPath: '/',
+    filename: '[name].js', // '[name].[chunkhash].js', '[name].[hash:6].js',
+    chunkFilename: '[chunkhash].js',
+    // publicPath: '/',
+    publicPath: '/assets/',
   },
   resolve: {
     modules: ['node_modules', 'src'],
@@ -85,5 +87,5 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins,
-  devtool: 'source-map',
+  // devtool: 'source-map',
 };
